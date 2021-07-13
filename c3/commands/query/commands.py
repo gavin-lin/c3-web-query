@@ -181,8 +181,8 @@ def read_cids(cid_list_file):
 
 @click.command()
 @click.option('--series',
-              type=click.Choice(['trusty']),
-              default='trusty',
+              type=click.Choice(['trusty', 'xenial']),
+              default='xenial',
               help='Which series including its point releases.')
 @click.option('--office',
               type=click.Choice(['taipei-office', 'canonical']),

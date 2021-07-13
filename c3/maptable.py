@@ -20,15 +20,17 @@ office = {'taipei-office': ['external-warehouse',
 series_eol = {'trusty': ['14.04 LTS',
                          '14.04.1 LTS', '14.04.2 LTS',
                          '14.04.3 LTS', '14.04.4 LTS',
-                         '14.04.5 LTS', '14.04.6 LTS']}
+                         '14.04.5 LTS', '14.04.6 LTS'],
+              'xenial': ['16.04 LTS',
+                         '16.04.1 LTS', '16.04.2 LTS',
+                         '16.04.3 LTS', '16.04.4 LTS',
+                         '16.04.5 LTS', '16.04.6 LTS']}
 
-series_alive = ['16.04 LTS',
-                '16.04.1 LTS', '16.04.2 LTS',
-                '16.04.3 LTS', '16.04.4 LTS',
-                '16.04.5 LTS', '16.04.6 LTS',
-                '18.04 LTS',
-                '18.04.1 LTS', '18.04.2 LTS'
-                '18.04.3 LTS', '18.04.4 LTS']
+series_alive = ['18.04 LTS',
+                '18.04.1 LTS', '18.04.2 LTS',
+                '18.04.3 LTS', '18.04.4 LTS',
+                '20.04 LTS',
+                '20.04.1 LTS', '20.04.2 LTS']
 
 status = {'return': 'Returned to partner/customer',
           'with canonical': 'With Canonical'}
