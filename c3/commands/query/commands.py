@@ -6,6 +6,7 @@ import c3.api.query as c3query
 import c3.io.cache as c3cache
 import c3.io.csv as c3csv
 import c3.maptable as c3maptable
+import c3.json.component as c3component
 
 
 logger = logging.getLogger('c3_web_query')
@@ -269,6 +270,23 @@ def get_verbose_eol_cid_objs(cid_cert_objs):
         cid_obj.codename = result['platform']['codename']
         cid_obj.form_factor = result['platform']['form_factor']
 
+        print(cid_cert_obj)
+        if cid_cert_obj['submission'] == '':
+            cid_obj.processor = ''
+            cid_obj.video = ''
+            cid_obj.wireless = ''
+        else:
+            result = c3query.query_submission_devices(cid_cert_obj['submission'])
+            try:
+                cid_obj.processor = c3component.get_component(result, 'PROCESSOR')[1]
+            except:
+                cid_obj.processor = ''
+            cid_obj.video = c3component.get_component(result, 'VIDEO')
+            try:
+                cid_obj.wireless = c3component.get_component(result, 'WIRELESS')[1]
+            except:
+                cid_obj.wireless = ''
+
         verbose_cid_cert_objs.append(cid_obj)
 
         counter += 1
@@ -294,16 +312,22 @@ def get_eol_cid_objs(series, office):
                 release = summary['release']['release']
                 level = summary['level']
                 status = summary['status']
-                logger.info('{} {} {} {} {}'.format(location,
+                try:
+                    submission = summary['report'].split('/')[-2]
+                except:
+                    submission = ''
+                logger.info('{} {} {} {} {} {}'.format(location,
                                                     cid,
                                                     release,
                                                     level,
-                                                    status))
+                                                    status,
+                                                    submission))
                 cid_cert_obj = {'cid': cid,
                                 'location': location,
                                 'release': release,
                                 'level': level,
-                                'status': status}
+                                'status': status,
+                                'submission': submission}
 
                 cid_cert_objs.append(cid_cert_obj)
 
@@ -342,7 +366,8 @@ def get_eol_cid_objs(series, office):
                                         'cert': _get_label(cid_cert_obj),
                                         'release': cid_cert_obj['release'],
                                         'level': cid_cert_obj['level'],
-                                        'status': cid_cert_obj['status']}
+                                        'status': cid_cert_obj['status'],
+                                        'submission': cid_cert_obj['submission']}
 
         cid_cert_objs_new.append(cid_cert_obj_new)
 

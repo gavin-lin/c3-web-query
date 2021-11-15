@@ -73,6 +73,9 @@ def generate_csv_row_eol_verbose(cid, writer):
                              'Model': cid.model,
                              'Code Name': cid.codename,
                              'Form': cid.form_factor,
+                             'CPU': cid.processor,
+                             'GPU': cid.video,
+                             'Wireless': cid.wireless,
                              'Cert Type': cid.cert
                              })
         except AttributeError:
@@ -99,7 +102,7 @@ def get_fieldnames(mode='submission'):
     elif mode == 'eol-verbose':
         fieldnames = ['CID', 'Location',
                       'Vendor', 'Model', 'Code Name', 'Form',
-                      'Cert Type']
+                      'CPU', 'GPU', 'Wireless', 'Cert Type']
     else:
         fieldnames = ""
 

@@ -25,6 +25,18 @@ def get_audio_component(device_report):
 
     return rtn_device
 
+def get_component(device_report, category='PROCESSOR'):
+    rtn_device = []
+
+    for device in device_report:
+        try:
+            if device['category']['name'] == category:
+                rtn_device.append(device['identifier'])
+                rtn_device.append(device['name'])
+        except Exception as e:
+            logger.warning(e)
+
+    return rtn_device
 
 def get_machine_info(machine_report):
     """
