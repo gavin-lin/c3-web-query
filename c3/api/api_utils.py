@@ -13,7 +13,7 @@ class QueryError(Exception):
 
 class APIQuery:
 
-    def __init__(self, instance_uri, timeout=30.0, max_retries=10):
+    def __init__(self, instance_uri, timeout=30.0, max_retries=3):
         self.instance_uri = instance_uri
         self.session = requests.session()
         self.timeout = timeout
